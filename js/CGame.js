@@ -452,7 +452,7 @@
     window.reportScoreResponse = function (json) {
   const data = JSON.parse(json);
 
-  if (data?.d?.success === 1) { 
+  if (data?.d?.success) { 
      window.gameToken = data.d.token;
   }
 };

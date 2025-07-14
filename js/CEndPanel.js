@@ -153,7 +153,7 @@ function CEndPanel(oSpriteBg){
          import(window.pfSDK).then(() => {
         const eventName = "pay_to_play";
         const callback = "replayResponse";
-  
+        console.log(`Restart: paytoplay request.`);
 
         const payload = {
             gameVersion: window.gameVersion,
