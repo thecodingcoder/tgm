@@ -15,8 +15,11 @@ import {
   browserLocalPersistence
 } from 'https://www.gstatic.com/firebasejs/10.3.0/firebase-auth.js'
 
-// Firebase configuration
-const firebaseConfig = {
+// Toggle this to switch environments
+const IS_PROD = false; // ✅ Set to true for production
+
+// --- FIREBASE CONFIGURATIONS ---
+const DEV_CONFIG = {
   apiKey: "AIzaSyBCgzV9Zkweb2s2PdcW0fN6xsHbynWOnS0",
   authDomain: "pf-dev-97473.firebaseapp.com",
   databaseURL: "https://pf-dev-97473-default-rtdb.asia-southeast1.firebasedatabase.app/",
@@ -25,7 +28,21 @@ const firebaseConfig = {
   messagingSenderId: "915516844096",
   appId: "1:915516844096:web:8e58c7c7831be01c2a17a5",
   measurementId: "G-F01XCGRM1B"
-}
+};
+
+const PROD_CONFIG = {
+  apiKey: "YOUR_PROD_API_KEY",
+  authDomain: "pf-prod.firebaseapp.com",
+  databaseURL: "https://pf-prod-default-rtdb.asia-southeast1.firebasedatabase.app/",
+  projectId: "pf-prod",
+  storageBucket: "pf-prod.appspot.com",
+  messagingSenderId: "YOUR_PROD_MESSAGING_SENDER_ID",
+  appId: "YOUR_PROD_APP_ID",
+  measurementId: "YOUR_PROD_MEASUREMENT_ID"
+};
+
+// --- INIT FIREBASE ---
+const firebaseConfig = IS_PROD ? PROD_CONFIG : DEV_CONFIG;
 export var app = initializeApp(firebaseConfig)
 export const db = getDatabase(app)
  
@@ -69,7 +86,7 @@ function login(sessionToken)
               });
           })
           .catch(error => {
-            console.error('Persistence error:', error.message);
+           // console.error('Persistence error:', error.message);
           });
 
 }
@@ -127,7 +144,7 @@ async function importWithRetry(url, retries = MAX_RETRIES) {
     // console.log(`Module loaded on attempt ${attempt}`);
       return module;
     } catch (e) {
-     console.warn(`Attempt ${attempt} failed to import module.`);
+    // console.warn(`Attempt ${attempt} failed to import module.`);
       if (attempt < retries) await new Promise(r => setTimeout(r, RETRY_DELAY_MS));
     }
   }
@@ -158,12 +175,12 @@ async function runGacha(eventName, payload, callbackFunction) {
       ]);
       //console.log(`${eventName} response from PARENT:`, response);
     } catch (e) {
-     console.error('sendEvent failed or timed out:', e);
+    // console.error('sendEvent failed or timed out:', e);
       throw e;
     }
 
     if (!response) {
-     console.warn(`No response received from sendEvent for event ${eventName}`);
+   //  console.warn(`No response received from sendEvent for event ${eventName}`);
     }
 
     const dataToLoad = response;
@@ -172,11 +189,11 @@ async function runGacha(eventName, payload, callbackFunction) {
   try {
     window[callbackFunction](JSON.stringify(dataToLoad));
   } catch (e) {
-    console.warn(`Callback "${callbackFunction}" failed:`, e);
+   // console.warn(`Callback "${callbackFunction}" failed:`, e);
   }
 }
   } catch (err) {
-    console.warn("Error in runGacha:", err);
+ //   console.warn("Error in runGacha:", err);
   }
 }
 

@@ -125,7 +125,7 @@ function CEndPanel(oSpriteBg){
     window.replayResponse = function (json) {
   const data = JSON.parse(json);
 
-  if (data?.d?.success1) { 
+  if (data?.d?.success) { 
      s_oGame.restartGame();
 
     createjs.Tween.get(_oFade).to({ alpha: 0 }, 500);
@@ -153,7 +153,7 @@ function CEndPanel(oSpriteBg){
          import(window.pfSDK).then(() => {
         const eventName = "pay_to_play";
         const callback = "replayResponse";
-        console.log(`Restart: paytoplay request.`);
+       // console.log(`Restart: paytoplay request.`);
 
         const payload = {
             gameVersion: window.gameVersion,

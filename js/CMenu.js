@@ -4,7 +4,7 @@
     window.gameSlug = '';
     window.userId = '';
     window.isLoggedIn = false;
-    window.gameVersion = '0.0.17';
+    window.gameVersion = '0.0.19';
     window.pfSDK = 'https://cdn.playfriends.gg/_1o/mrtf_10y_zx11-a/f8d3b54c.js';
     
     function CMenu(){
@@ -202,7 +202,7 @@
     
     this._onButPlayRelease = function(){
          
-    
+ 
 
         import(window.pfSDK).then(() => {
         const eventName = "pay_to_play";

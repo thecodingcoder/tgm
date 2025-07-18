@@ -435,7 +435,7 @@
     
         // Use window.gameToken instead of a parameter
         if (typeof window.gameToken !== "string" || window.gameToken.length < hash_diff) {
-            console.warn("Invalid or too short gameToken:", window.gameToken);
+            //console.warn("Invalid or too short gameToken:", window.gameToken);
             return 0;
         }
     
